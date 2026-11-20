@@ -48,7 +48,7 @@ def audit_hardcoded_patterns() -> Dict[str, Any]:
     ]
 
     for fpath in py_files:
-        if fpath.name == "verify_codebase.py":
+        if fpath.name in ["verify_codebase.py", "audit_hardcoded.py"]:
             continue
         try:
             content = fpath.read_text(encoding="utf-8")
