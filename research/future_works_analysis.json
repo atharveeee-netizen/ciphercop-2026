@@ -1,0 +1,467 @@
+[
+  {
+    "title": "Vision-Language Memory for Spatial Reasoning",
+    "url": "http://arxiv.org/abs/2511.20644v2",
+    "domain": "uav aerial surveillance computer vision",
+    "future_work": [
+      "To address these limitations, we present VLM$^2$, a Vision-Language Model with persistent Memory for spatial reasoning with a view-consistent, 3D-aware representation purely from 2D videos"
+    ]
+  },
+  {
+    "title": "Hierarchical Pre-Training of Vision Encoders with Large Language Model",
+    "url": "http://arxiv.org/abs/2604.00086v2",
+    "domain": "uav aerial surveillance computer vision",
+    "future_work": [
+      "However, existing approaches often treat vision encoders and large language models (LLMs) as independent modules, limiting the integration of hierarchical visual features"
+    ]
+  },
+  {
+    "title": "FedCV: A Federated Learning Framework for Diverse Computer Vision Tasks",
+    "url": "http://arxiv.org/abs/2111.11066v1",
+    "domain": "uav aerial surveillance computer vision",
+    "future_work": [
+      "However, in the computer vision domain, model performance in FL is far behind centralized training due to the lack of exploration in diverse tasks with a unified FL framework"
+    ]
+  },
+  {
+    "title": "SAFER: Situation Aware Facial Emotion Recognition",
+    "url": "http://arxiv.org/abs/2306.09372v1",
+    "domain": "drone facial recognition unconstrained",
+    "future_work": [
+      "Additionally, the study investigates the effect of novelty such as face masks during the Covid-19 pandemic on facial emotion recognition and critically examines the limitations of mainstream facial expressions datasets",
+      "To address these limitations, a novel dataset for facial emotion recognition is proposed"
+    ]
+  },
+  {
+    "title": "Exploiting Emotional Dependencies with Graph Convolutional Networks for Facial Expression Recognition",
+    "url": "http://arxiv.org/abs/2106.03487v2",
+    "domain": "drone facial recognition unconstrained",
+    "future_work": [
+      "However, we have no clear evidence as to which representation is more appropriate and the majority of FER systems use either the categorical or the dimensional model of affect"
+    ]
+  },
+  {
+    "title": "Facial Expression Recognition Research Based on Deep Learning",
+    "url": "http://arxiv.org/abs/1904.09737v3",
+    "domain": "drone facial recognition unconstrained",
+    "future_work": [
+      "However, the classification mechanism of convolution neural networks is still an unsolved core problem"
+    ]
+  },
+  {
+    "title": "Efficient ConvNet-based Object Detection for Unmanned Aerial Vehicles by Selective Tile Processing",
+    "url": "http://arxiv.org/abs/1911.06073v1",
+    "domain": "aerial object detection visdrone",
+    "future_work": [
+      "To keep the computational demands low these neural networks typically operate on small image sizes which, however, makes it difficult to detect small objects"
+    ]
+  },
+  {
+    "title": "PVAFN: Point-Voxel Attention Fusion Network with Multi-Pooling Enhancing for 3D Object Detection",
+    "url": "http://arxiv.org/abs/2408.14600v1",
+    "domain": "aerial object detection visdrone",
+    "future_work": [
+      "However, this combination often struggles with capturing semantic information effectively",
+      "Moreover, relying solely on point features within regions of interest can lead to information loss and limitations in local feature representation"
+    ]
+  },
+  {
+    "title": "TJU-DHD: A Diverse High-Resolution Dataset for Object Detection",
+    "url": "http://arxiv.org/abs/2011.09170v1",
+    "domain": "aerial object detection visdrone",
+    "future_work": [
+      "However, the state-of-the-art performance of detecting such important objects (esp"
+    ]
+  },
+  {
+    "title": "Cross-View Open-Vocabulary Object Detection in Aerial Imagery",
+    "url": "http://arxiv.org/abs/2510.03858v1",
+    "domain": "aerial object detection visdrone",
+    "future_work": [
+      "Open-vocabulary object detection addresses this limitation by enabling models to identify unseen classes without explicit training"
+    ]
+  },
+  {
+    "title": "Object Detection with Multimodal Large Vision-Language Models: An In-depth Review",
+    "url": "http://arxiv.org/abs/2508.19294v2",
+    "domain": "aerial object detection visdrone",
+    "future_work": [
+      "The review also identifies a few major limitations of the current LVLM modes, proposes solutions to address those challenges, and presents a clear roadmap for the future advancement in this field",
+      "We conclude, based on this study, that the recent advancement in LVLMs have made and will continue to make a transformative impact on object detection and robotic applications in the future."
+    ]
+  },
+  {
+    "title": "The Solution for CVPR2024 Foundational Few-Shot Object Detection Challenge",
+    "url": "http://arxiv.org/abs/2406.12225v1",
+    "domain": "aerial object detection visdrone",
+    "future_work": [
+      "However, on specific datasets, VLM may encounter the problem where the detected targets are misaligned with the target concepts of interest"
+    ]
+  },
+  {
+    "title": "RGBT Salient Object Detection: A Large-scale Dataset and Benchmark",
+    "url": "http://arxiv.org/abs/2007.03262v6",
+    "domain": "aerial object detection visdrone",
+    "future_work": [
+      "However, current research for RGBT salient object detection is limited by the lack of a large-scale dataset and comprehensive benchmark"
+    ]
+  },
+  {
+    "title": "BEVDet: High-performance Multi-camera 3D Object Detection in Bird-Eye-View",
+    "url": "http://arxiv.org/abs/2112.11790v3",
+    "domain": "aerial object detection visdrone",
+    "future_work": [
+      "The source code is publicly available for further research at https://github.com/HuangJunJie2017/BEVDet ."
+    ]
+  },
+  {
+    "title": "Boosting Detection in Crowd Analysis via Underutilized Output Features",
+    "url": "http://arxiv.org/abs/2308.16187v1",
+    "domain": "crowd density anomaly detection uav",
+    "future_work": [
+      "However, we argue that the potential of these methods has been underestimated, as they offer crucial information for crowd analysis that is often ignored",
+      "Based on these features, we further propose region-adaptive NMS thresholds and a decouple-then-align paradigm that address the major limitations of detection-based methods"
+    ]
+  },
+  {
+    "title": "Trustworthy Anomaly Detection: A Survey",
+    "url": "http://arxiv.org/abs/2202.07787v1",
+    "domain": "crowd density anomaly detection uav",
+    "future_work": [
+      "Despite the successes, anomaly detection models still face many limitations",
+      "However, the attention to anomaly detection tasks is far from sufficient",
+      "In this brief survey, we summarize the existing efforts and discuss open problems towards trustworthy anomaly detection from the perspectives of interpretability, fairness, robustness, and privacy-preservation."
+    ]
+  },
+  {
+    "title": "Mul-GAD: a semi-supervised graph anomaly detection framework via aggregating multi-view information",
+    "url": "http://arxiv.org/abs/2212.05478v1",
+    "domain": "crowd density anomaly detection uav",
+    "future_work": [
+      "However, recent studies have shown that GNN-based methods encounter challenge, in that no graph anomaly detection algorithm can perform generalization on most datasets"
+    ]
+  },
+  {
+    "title": "SplatPose & Detect: Pose-Agnostic 3D Anomaly Detection",
+    "url": "http://arxiv.org/abs/2404.06832v1",
+    "domain": "crowd density anomaly detection uav",
+    "future_work": [
+      "However, most current methods are not suited to address 3D objects captured from differing poses"
+    ]
+  },
+  {
+    "title": "Learning Representation for Anomaly Detection of Vehicle Trajectories",
+    "url": "http://arxiv.org/abs/2303.05000v1",
+    "domain": "crowd density anomaly detection uav",
+    "future_work": [
+      "However, when small crafted perturbations are introduced to those history trajectories, the resulting anomalous (or adversarial) trajectories can significantly mislead the future trajectory prediction module of the ego vehicle, which may result in unsafe planning and even fatal accidents"
+    ]
+  },
+  {
+    "title": "Representation Learning in Anomaly Detection: Successes, Limits and a Grand Challenge",
+    "url": "http://arxiv.org/abs/2307.11085v1",
+    "domain": "crowd density anomaly detection uav",
+    "future_work": [
+      "These limitations can be overcome when there are strong tasks priors, as is the case for many industrial tasks"
+    ]
+  },
+  {
+    "title": "Understanding the Effect of Bias in Deep Anomaly Detection",
+    "url": "http://arxiv.org/abs/2105.07346v1",
+    "domain": "crowd density anomaly detection uav",
+    "future_work": [
+      "However, the labeled data often does not align with the target distribution and introduces harmful bias to the trained model"
+    ]
+  },
+  {
+    "title": "New Methods and Datasets for Group Anomaly Detection From Fundamental Physics",
+    "url": "http://arxiv.org/abs/2107.02821v1",
+    "domain": "crowd density anomaly detection uav",
+    "future_work": [
+      "However, it has received relatively little attention in the broader ML community, as compared to point anomalies or other types of single instance outliers"
+    ]
+  },
+  {
+    "title": "BeSTAD: Behavior-Aware Spatio-Temporal Anomaly Detection for Human Mobility Data",
+    "url": "http://arxiv.org/abs/2510.12076v1",
+    "domain": "crowd density anomaly detection uav",
+    "future_work": [
+      "However, detecting individual-level anomalies, i.e., unusual deviations in a person's mobility behavior relative to their own historical patterns, within datasets encompassing large populations remains a significant challenge"
+    ]
+  },
+  {
+    "title": "Multi-Flow: Multi-View-Enriched Normalizing Flows for Industrial Anomaly Detection",
+    "url": "http://arxiv.org/abs/2504.03306v1",
+    "domain": "crowd density anomaly detection uav",
+    "future_work": [
+      "However, real-world production scenarios often involve complex industrial products, whose properties may not be fully captured by one single image"
+    ]
+  },
+  {
+    "title": "A Hybrid Deep Learning Anomaly Detection Framework for Intrusion Detection",
+    "url": "http://arxiv.org/abs/2212.00966v1",
+    "domain": "crowd density anomaly detection uav",
+    "future_work": [
+      "However, the expensive data labeling and limitation of anomalous data make it challenging to train an intrusion detector in a fully supervised manner"
+    ]
+  },
+  {
+    "title": "Advanced computer vision for extracting georeferenced vehicle trajectories from drone imagery",
+    "url": "http://arxiv.org/abs/2411.02136v3",
+    "domain": "geospatial intelligence drone georeferencing",
+    "future_work": [
+      "This paper presents a framework for extracting georeferenced vehicle trajectories from high-altitude drone imagery, addressing key challenges in urban traffic monitoring and the limitations of traditional ground-based systems"
+    ]
+  },
+  {
+    "title": "Creative Problem Solving in Artificially Intelligent Agents: A Survey and Framework",
+    "url": "http://arxiv.org/abs/2204.10358v1",
+    "domain": "geospatial intelligence drone georeferencing",
+    "future_work": [
+      "To stimulate further research in CPS, we present a definition and a framework of CPS, which we adopt to categorize existing AI methods in this field"
+    ]
+  },
+  {
+    "title": "Intelligent Querying for Target Tracking in Camera Networks using Deep Q-Learning with n-Step Bootstrapping",
+    "url": "http://arxiv.org/abs/2004.09632v1",
+    "domain": "multi camera tracking drone cctv reid",
+    "future_work": [
+      "However, since camera networks can generate enormous amount of video data, inefficient schemes for making re-identification or trajectory association queries can incur prohibitively large computational requirements"
+    ]
+  },
+  {
+    "title": "Millimeter Wave Drones with Cameras: Computer Vision Aided Wireless Beam Prediction",
+    "url": "http://arxiv.org/abs/2211.07569v1",
+    "domain": "multi camera tracking drone cctv reid",
+    "future_work": [
+      "However, these drones need to deploy large antenna arrays and use narrow directive beams to maintain a sufficient link budget"
+    ]
+  },
+  {
+    "title": "Autonomous Drone Landing with Fiducial Markers and a Gimbal-Mounted Camera for Active Tracking",
+    "url": "http://arxiv.org/abs/2206.04617v3",
+    "domain": "multi camera tracking drone cctv reid",
+    "future_work": [
+      "However, most work in this field depends on either rigidly-mounted or downward-facing cameras which restrict the drone's ability to detect the marker"
+    ]
+  },
+  {
+    "title": "SPOT!: Map-Guided LLM Agent for Unsupervised Multi-CCTV Dynamic Object Tracking",
+    "url": "http://arxiv.org/abs/2512.20975v2",
+    "domain": "multi camera tracking drone cctv reid",
+    "future_work": [
+      "CCTV-based vehicle tracking systems face structural limitations in continuously connecting the trajectories of the same vehicle across multiple camera environments"
+    ]
+  },
+  {
+    "title": "Awesome Multi-modal Object Tracking",
+    "url": "http://arxiv.org/abs/2405.14200v2",
+    "domain": "multi camera tracking drone cctv reid",
+    "future_work": [
+      "However, existing MMOT algorithms mainly focus on two modalities (\\eg RGB+depth, RGB+thermal infrared, and RGB+language)"
+    ]
+  },
+  {
+    "title": "CAMO-MOT: Combined Appearance-Motion Optimization for 3D Multi-Object Tracking with Camera-LiDAR Fusion",
+    "url": "http://arxiv.org/abs/2209.02540v3",
+    "domain": "multi camera tracking drone cctv reid",
+    "future_work": [
+      "However, camera-based methods suffer in the case of occlusions and it can be challenging to accurately track the irregular motion of objects for LiDAR-based methods"
+    ]
+  },
+  {
+    "title": "Multi-camera Multi-Object Tracking",
+    "url": "http://arxiv.org/abs/1709.07065v1",
+    "domain": "multi camera tracking drone cctv reid",
+    "future_work": [
+      "However, most of the multi-camera tracking algorithms emphasis on single camera across frame data association"
+    ]
+  },
+  {
+    "title": "Semi-Supervised Visual Tracking of Marine Animals using Autonomous Underwater Vehicles",
+    "url": "http://arxiv.org/abs/2302.07344v1",
+    "domain": "multi camera tracking drone cctv reid",
+    "future_work": [
+      "Recently, however, autonomous underwater vehicles equipped with cameras and embedded computers with GPU capabilities are being developed for a variety of applications, and in particular, can be used to supplement these existing data collection mechanisms where human operation or tags are more difficult",
+      "However, because there are not existing realistic underwater tracking datasets, the performance of semi-supervised tracking algorithms in the marine domain is not well understood"
+    ]
+  },
+  {
+    "title": "NTIRE 2025 Challenge on RAW Image Restoration and Super-Resolution",
+    "url": "http://arxiv.org/abs/2506.02197v2",
+    "domain": "face super resolution surveillance restoration",
+    "future_work": [
+      "New methods for RAW Restoration and Super-Resolution could be essential in modern Image Signal Processing (ISP) pipelines, however, this problem is not as explored as in the RGB domain"
+    ]
+  },
+  {
+    "title": "Learning Spatial Attention for Face Super-Resolution",
+    "url": "http://arxiv.org/abs/2012.01211v2",
+    "domain": "face super resolution surveillance restoration",
+    "future_work": [
+      "However, multi-task learning requires extra manually labeled data"
+    ]
+  },
+  {
+    "title": "Asymmetric CNN for image super-resolution",
+    "url": "http://arxiv.org/abs/2103.13634v2",
+    "domain": "face super resolution surveillance restoration",
+    "future_work": [
+      "However, customized architectures gather different features via treating all pixel points as equal to improve the performance of given application, which ignores the effects of local power pixel points and results in low training efficiency"
+    ]
+  },
+  {
+    "title": "WaveFreqAnchor: Wave-Structural Anchoring and Frequency Correction Diffusion for Training-Free Face Restoration",
+    "url": "http://arxiv.org/abs/2608.06717v1",
+    "domain": "face super resolution surveillance restoration",
+    "future_work": [
+      "However, existing approaches provide insufficient constraints during reverse diffusion, causing identity-related structural drift and degraded fidelity under severe degradations"
+    ]
+  },
+  {
+    "title": "Truly Sub-Nyquist Method Based Matrix Pencil and CRT with Super Resolution",
+    "url": "http://arxiv.org/abs/2410.17841v1",
+    "domain": "face super resolution surveillance restoration",
+    "future_work": [
+      "Sub-Nyquist sampling methods, such as the modulated wideband converter (MWC) and compressed auto-correlation spectrum sensing (CCS), address the limitations of traditional analog-to-digital converters (ADCs) by capturing signals below the Nyquist rate",
+      "However, these methods face challenges like spectral leakage and complex hardware requirements"
+    ]
+  },
+  {
+    "title": "Effectiveness of State-of-the-Art Super Resolution Algorithms in Surveillance Environment",
+    "url": "http://arxiv.org/abs/2107.04133v1",
+    "domain": "face super resolution surveillance restoration",
+    "future_work": [
+      "Due to the limitations of camera hardware, camera pose, limited bandwidth, varying illumination conditions, and occlusions, the quality of the surveillance feed is significantly degraded at times, thereby compromising monitoring of behavior, activities, and other sporadic information in the scene"
+    ]
+  },
+  {
+    "title": "Harnessing Temporal Causality for Advanced Temporal Action Detection",
+    "url": "http://arxiv.org/abs/2407.17792v2",
+    "domain": "uav violence detection action recognition",
+    "future_work": [
+      "However, these modules typically treat past and future information equally, overlooking the crucial fact that changes in action boundaries are essentially causal events"
+    ]
+  },
+  {
+    "title": "Action Transformer: A Self-Attention Model for Short-Time Pose-Based Human Action Recognition",
+    "url": "http://arxiv.org/abs/2107.00606v6",
+    "domain": "uav violence detection action recognition",
+    "future_work": [
+      "The proposed methodology was extensively tested on MPOSE2021 and compared to several state-of-the-art architectures, proving the effectiveness of the AcT model and laying the foundations for future work on HAR."
+    ]
+  },
+  {
+    "title": "NeuroPath: Brain-Inspired Dual-Pathway Graph Convolutional Networks for Skeleton-Based Action Recognition",
+    "url": "http://arxiv.org/abs/2608.17487v1",
+    "domain": "uav violence detection action recognition",
+    "future_work": [
+      "However, our empirical study reveals a clear performance imbalance across different skeletal modalities, indicating that implicitly coupling spatial and temporal information limits the full exploitation of complementary structural and motion cues"
+    ]
+  },
+  {
+    "title": "Can VLMs be used on videos for action recognition? LLMs are Visual Reasoning Coordinators",
+    "url": "http://arxiv.org/abs/2407.14834v1",
+    "domain": "uav violence detection action recognition",
+    "future_work": [
+      "However, our findings suggest that to enhance this approach as a viable alternative solution, integrating a stronger temporal signal and exposing the models to slightly more frames would be beneficial."
+    ]
+  },
+  {
+    "title": "Part-aware Prototypical Graph Network for One-shot Skeleton-based Action Recognition",
+    "url": "http://arxiv.org/abs/2208.09150v1",
+    "domain": "uav violence detection action recognition",
+    "future_work": [
+      "To overcome the above limitation, we propose a part-aware prototypical representation for one-shot skeleton-based action recognition"
+    ]
+  },
+  {
+    "title": "Dynamic Pricing for On-Demand DNN Inference in the Edge-AI Market",
+    "url": "http://arxiv.org/abs/2503.04521v2",
+    "domain": "edge tensorrt drone jetson inference",
+    "future_work": [
+      "However, existing research has yet to adopt a practical Edge-AI market perspective, which would explore the personalized inference needs of AI users (e.g., inference accuracy, latency, and task complexity), the revenue incentives for AI service providers that offer edge inference services, and multi-stakeholder governance within a market-oriented context"
+    ]
+  },
+  {
+    "title": "Real-Time Industrial Defect Detection on Edge Hardware Using Fine-Tuned YOLOv8: A Systematic Benchmark on the NEU Surface Defect Database and MVTec AD with Automotive & Battery Manufacturing Extensions",
+    "url": "http://arxiv.org/abs/2606.07659v1",
+    "domain": "edge tensorrt drone jetson inference",
+    "future_work": [
+      "While deep learning models offer remarkable accuracy, deploying them on resource-constrained edge hardware without introducing significant latency remains a persistent challenge"
+    ]
+  },
+  {
+    "title": "Accelerating Data Preprocessing for Efficient Vision Model Inference on Jetson Edge Device",
+    "url": "http://arxiv.org/abs/2608.27655v1",
+    "domain": "edge tensorrt drone jetson inference",
+    "future_work": [
+      "However, decoding data saved in JPEG format is very compute-intensive and occupies a major portion of the preprocessing pipeline"
+    ]
+  },
+  {
+    "title": "A Distributed Framework for Privacy-Enhanced Vision Transformers on the Edge",
+    "url": "http://arxiv.org/abs/2512.09309v1",
+    "domain": "edge tensorrt drone jetson inference",
+    "future_work": [
+      "However, these tools have high computational requirements that exceed the capabilities of resource-constrained mobile and wearable devices"
+    ]
+  },
+  {
+    "title": "Building a Privacy-Preserving Smart Camera System",
+    "url": "http://arxiv.org/abs/2201.09338v1",
+    "domain": "privacy preserving biometric surveillance",
+    "future_work": [
+      "However, the architecture and design of popular commercial systems require users to relinquish control of their data to untrusted third parties, such as service providers (e.g., the cloud)"
+    ]
+  },
+  {
+    "title": "FaceMAE: Privacy-Preserving Face Recognition via Masked Autoencoders",
+    "url": "http://arxiv.org/abs/2205.11090v1",
+    "domain": "privacy preserving biometric surveillance",
+    "future_work": [
+      "However, the privacy issues of public face datasets have attracted increasing attention in recent years"
+    ]
+  },
+  {
+    "title": "Approximate, Adapt, Anonymize (3A): a Framework for Privacy Preserving Training Data Release for Machine Learning",
+    "url": "http://arxiv.org/abs/2307.01875v1",
+    "domain": "privacy preserving biometric surveillance",
+    "future_work": [
+      "However, in domains with sensitive information, the release of high-utility data which protects the privacy of individuals has proven challenging"
+    ]
+  },
+  {
+    "title": "Secure and Privacy-Preserving Authentication for Data Subject Rights Enforcement",
+    "url": "http://arxiv.org/abs/2404.15859v1",
+    "domain": "privacy preserving biometric surveillance",
+    "future_work": [
+      "However, previous research has shown that this is associated with various security and privacy risks and that identifying DSs can be a non-trivial task"
+    ]
+  },
+  {
+    "title": "DP-CDA: An Algorithm for Enhanced Privacy Preservation in Dataset Synthesis Through Randomized Mixing",
+    "url": "http://arxiv.org/abs/2411.16121v3",
+    "domain": "privacy preserving biometric surveillance",
+    "future_work": [
+      "However, these datasets often contain sensitive and personal information, which raises serious privacy concerns"
+    ]
+  },
+  {
+    "title": "Misanthrope: A Privacy-Preserving Keypoint Detector",
+    "url": "http://arxiv.org/abs/2608.23012v1",
+    "domain": "privacy preserving biometric surveillance",
+    "future_work": [
+      "However, the local image features central to this task are vulnerable to inversion attacks, which enable adversaries to reconstruct privacy-sensitive scene content from local features"
+    ]
+  },
+  {
+    "title": "SRFed: Mitigating Poisoning Attacks in Privacy-Preserving Federated Learning with Heterogeneous Data",
+    "url": "http://arxiv.org/abs/2602.16480v1",
+    "domain": "privacy preserving biometric surveillance",
+    "future_work": [
+      "However, FL faces two critical security threats: curious servers that may launch inference attacks to reconstruct clients' private data, and compromised clients that can launch poisoning attacks to disrupt model aggregation",
+      "However, they either incur high computation and communication overhead or perform poorly under non-independent and identically distributed (Non-IID) data settings"
+    ]
+  }
+]
