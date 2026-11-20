@@ -59,3 +59,17 @@
   - [x] ArcFace angular margin loss ($s=64, m=0.5$) biometric training harness (`train_face_restoration.py`).
   - [x] Spatio-temporal crowd velocity divergence flux threshold calibrator (`train_crowd_divergence.py`).
   - [x] Literature adaptation documentation in `research/TRAINING_DATASETS_AND_ADAPTATIONS.md`.
+
+- [x] **Milestone 12: Tactical Frontend Recon & Avionic Cockpit Integration (`frontend/` & `src/server/static/`)**
+  - [x] Cloned and analyzed reference implementation `halilxibrahim/uav-telemetry-dashboard` (MIT).
+  - [x] Preserved complete React 19 / TypeScript reference architecture in `frontend/`.
+  - [x] Implemented HTML5 Canvas Artificial Horizon (Attitude Indicator) with 60fps pitch ladder, roll pointer, and sky/ground gradient clipping.
+  - [x] Integrated Avionic Cockpit Gauges (Heading compass needle, Altitude vertical bar, Speed horizontal bar, Battery health).
+  - [x] Implemented 6-stage Mission Phase Stepper (`PRE-FLIGHT` to `LANDING`) with active pulsing beacon and progress percentage.
+  - [x] Added Environmental & Hardware Sensor Matrix (`TEMP`, `PRES`, `WIND`, `SATS`, `HDOP`, `RSSI`).
+  - [x] Seamlessly unified with AegisDrone public safety engines: Leaflet GIS WGS84 raycast map, Dual-Camera Video HUD, DPDP 2023 privacy redaction toggle, crowd divergence flux barometer, and SHA-256 blockchain audit ledger.
+
+- [x] **Milestone 13: Local C2 Hosting & Automated Verification**
+  - [x] Installed `websockets` dependency for FastAPI WebSocket protocol compliance.
+  - [x] Running daemon background C2 server on `http://localhost:8000`.
+  - [x] Verified all 5 critical verification gates via `scripts/verify_codebase.py`.

@@ -3,134 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AegisDrone-GEOINT | Tactical C2 Console (CipherCop 2026)</title>
+    <title>AegisDrone-GEOINT | Tactical Avionic C2 Console (CipherCop 2026)</title>
     <!-- Leaflet CSS for Tactical GIS Map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="/static/style.css">
-    <!-- Google Fonts: Space Grotesk & JetBrains Mono -->
+    <!-- Google Fonts: JetBrains Mono & Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="c2-container">
-        <!-- Top Tactical Navigation Bar -->
+        <!-- Top Avionic Tactical Navigation Bar -->
         <header class="tactical-header">
             <div class="brand-zone">
-                <div class="pulse-indicator live"></div>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="brand-drone-icon">
+                    <path d="M12 2L4 7v4l8 5 8-5V7l-8-5z" stroke="#00e5ff" stroke-width="1.8" fill="none" />
+                    <path d="M12 12v10M4 11l8 5 8-5" stroke="#00e5ff" stroke-width="1.8" />
+                    <circle cx="12" cy="7" r="2.5" fill="#00e5ff" />
+                </svg>
                 <div class="title-group">
                     <h1>AEGISDRONE-GEOINT <span class="badge-accent">SENTINELGRID-360</span></h1>
                     <p class="subtitle">ISB CipherCop 2026 | Team Gradient Ascent | Track 1: AI for Smart Public Safety</p>
                 </div>
             </div>
-            <div class="telemetry-bar">
-                <div class="telemetry-pill">
-                    <span class="label">UAV STATUS</span>
-                    <span class="val green" id="uav-status">AIRBORNE (55.4m)</span>
+
+            <div class="header-status-group">
+                <div class="status-pill">
+                    <span class="status-dot live" id="conn-dot"></span>
+                    <span class="status-label" id="conn-status">WS CONNECTED</span>
                 </div>
                 <div class="telemetry-pill">
-                    <span class="label">CROWD FLUX (∇·v)</span>
-                    <span class="val" id="crowd-flux-val">+0.12 m/s</span>
-                </div>
-                <div class="telemetry-pill">
-                    <span class="label">PROOF-OF-SURVEILLANCE</span>
-                    <span class="val cyan" id="audit-height">BLOCK #4</span>
+                    <span class="label">FLIGHT TIME</span>
+                    <span class="val cyan" id="flight-timer">00:00</span>
                 </div>
                 <div class="telemetry-pill">
                     <span class="label">PRIVACY FILTER</span>
-                    <span class="val green" id="privacy-status">DPDP ACTIVE (94%)</span>
+                    <button class="btn-privacy-toggle active" id="btn-privacy" onclick="togglePrivacyFilter()">DPDP 2023: ACTIVE</button>
+                </div>
+                <div class="telemetry-pill">
+                    <span class="label">UTC TIME</span>
+                    <span class="val font-tabular" id="utc-clock">00:00:00 UTC</span>
                 </div>
                 <button class="btn-dispatch" id="btn-dispatch" onclick="triggerEmergencyDispatch()">EMERGENCY DISPATCH</button>
             </div>
         </header>
 
-        <!-- Main Tactical Grid -->
-        <main class="tactical-grid">
-            <!-- Left Pane: GIS Geospatial Tactical Map -->
-            <section class="panel map-panel">
-                <div class="panel-header">
-                    <h2><span class="icon">🌐</span> 4D TACTICAL GEOSPATIAL MAP (LEAFLET / WGS84)</h2>
-                    <div class="panel-actions">
-                        <span class="tag">REAL-TIME GPS PROJECTION</span>
-                        <span class="tag accent" id="target-count-tag">5 TARGETS TRACKED</span>
-                    </div>
-                </div>
-                <div id="map" class="map-view"></div>
-                <div class="map-footer-telemetry">
-                    <span><strong>Center:</strong> 17.445620° N, 78.349810° E</span>
-                    <span><strong>Active Geofences:</strong> 2 (VIP Enclosure, North Gate)</span>
-                    <span><strong>MTMC Handover Node:</strong> UAV-ALPHA-01 ⟷ CCTV-POLE-04</span>
-                </div>
-            </section>
+        <!-- Mission Phase Progression Bar -->
+        <div class="mission-status-bar">
+            <div class="mission-phases" id="mission-phases">
+                <!-- Dynamically populated phase nodes -->
+            </div>
+            <div class="mission-progress-box">
+                <span class="label">MISSION PROGRESS</span>
+                <span class="progress-val cyan" id="mission-progress-val">0%</span>
+            </div>
+        </div>
 
-            <!-- Right Pane: Multi-Camera Video Feed & AI Inference Heads -->
-            <section class="panel video-panel">
-                <div class="panel-header">
-                    <h2><span class="icon">📹</span> SENSOR VIDEO FEED & PRIVACY REDACTION</h2>
-                    <div class="feed-selector">
-                        <button class="feed-btn active" onclick="switchFeed('UAV-ALPHA-01')">UAV-ALPHA-01 (4K)</button>
-                        <button class="feed-btn" onclick="switchFeed('CCTV-POLE-04')">CCTV-POLE-04 (1080P)</button>
-                    </div>
-                </div>
-                <div class="video-container">
-                    <img id="live-feed-img" src="/api/frame/UAV-ALPHA-01" alt="Tactical Video Stream">
-                    <div class="tactical-hud-overlay">
-                        <div class="hud-top-left">REC ● [1080p 30fps]</div>
-                        <div class="hud-top-right">BLIND SR: ENABLED</div>
-                        <div class="hud-reticle"></div>
-                    </div>
-                </div>
-                <div class="crowd-barometer-card">
-                    <div class="barometer-title">
-                        <span>CROWD PANIC / STAMPEDE BAROMETER</span>
-                        <span class="risk-badge" id="crowd-risk-badge">LOW RISK</span>
-                    </div>
-                    <div class="bar-track">
-                        <div class="bar-fill" id="crowd-bar-fill" style="width: 14%;"></div>
-                    </div>
-                    <div class="bar-metrics">
-                        <span>Density: <strong id="density-val">1.8 pax/m²</strong></span>
-                        <span>Velocity Divergence: <strong id="div-flux-val">+0.14</strong></span>
-                        <span>Altercation State: <strong id="fight-val" class="green">NORMAL</strong></span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Bottom Left: Biometric Watchlist & Positive Hits -->
-            <section class="panel watchlist-panel">
-                <div class="panel-header">
-                    <h2><span class="icon">🎯</span> BIOMETRIC WATCHLIST HITS (512-D ARCFACE MATCHES)</h2>
-                    <span class="badge red">1 TARGET IDENTIFIED</span>
-                </div>
-                <div class="suspect-card" id="suspect-card">
-                    <div class="suspect-avatar">
-                        <div class="avatar-ring"></div>
-                        <span class="avatar-text">TARGET</span>
-                    </div>
-                    <div class="suspect-info">
-                        <div class="suspect-name" id="suspect-name">Rohan Sharma</div>
-                        <div class="suspect-warrant red" id="suspect-warrant">RED NOTICE FUGITIVE #441</div>
-                        <div class="suspect-meta">
-                            <span>Confidence: <strong class="green" id="suspect-conf">89.2%</strong></span>
-                            <span>Matched At: <strong id="suspect-cam">UAV-ALPHA-01</strong></span>
-                            <span>GPS: <strong id="suspect-gps">17.445892, 78.350114</strong></span>
+        <!-- Main Tactical 3-Column Cockpit Grid -->
+        <main class="cockpit-grid">
+            <!-- Left Column: Tactical GIS Map & Dual Video Stream -->
+            <section class="grid-col left-col">
+                <!-- 4D Leaflet GIS Map -->
+                <div class="panel map-panel">
+                    <div class="panel-header">
+                        <h2><span class="icon">🌐</span> 4D TACTICAL GEOSPATIAL MAP (LEAFLET / WGS84)</h2>
+                        <div class="panel-tags">
+                            <span class="tag">SUB-2.5M RAYCAST</span>
+                            <span class="tag accent" id="target-count-tag">0 TARGETS</span>
                         </div>
                     </div>
-                    <button class="btn-intercept" onclick="alert('INTERCEPT PROTOCOL DISPATCHED TO FIRST RESPONDERS')">DISPATCH INTERCEPT</button>
+                    <div id="map" class="map-view"></div>
+                    <div class="map-footer-telemetry">
+                        <span><strong>GRID CENTER:</strong> 17.445620° N, 78.349810° E</span>
+                        <span><strong>GEOFENCES:</strong> 2 ZONES (VIP, GATE-3)</span>
+                        <span><strong>MTMC NODE:</strong> UAV-ALPHA-01 ⟷ CCTV-POLE-04</span>
+                    </div>
+                </div>
+
+                <!-- Video Sensor Stream with Privacy Redaction -->
+                <div class="panel video-panel">
+                    <div class="panel-header">
+                        <h2><span class="icon">📹</span> SENSOR VIDEO FEED & PRIVACY REDACTION</h2>
+                        <div class="feed-selector">
+                            <button class="feed-btn active" id="btn-feed-uav" onclick="switchFeed('UAV-ALPHA-01')">UAV-ALPHA-01 (4K)</button>
+                            <button class="feed-btn" id="btn-feed-cctv" onclick="switchFeed('CCTV-POLE-04')">CCTV-POLE-04 (1080P)</button>
+                        </div>
+                    </div>
+                    <div class="video-container">
+                        <img id="live-feed-img" src="/api/frame/UAV-ALPHA-01" alt="Tactical Sensor Stream">
+                        <div class="tactical-hud-overlay">
+                            <div class="hud-top-left">REC ● [1080p 30fps]</div>
+                            <div class="hud-top-right" id="hud-privacy-badge">DPDP MASKING: ON</div>
+                            <div class="hud-reticle"></div>
+                            <div class="hud-bottom-telemetry">
+                                <span id="hud-cam-id">UAV-ALPHA-01</span> | 
+                                <span id="hud-alt-txt">ALT: 55.0m</span> | 
+                                <span id="hud-spd-txt">SPD: 12.5m/s</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- Bottom Right: Cryptographic Blockchain Proof-of-Surveillance Ledger -->
-            <section class="panel audit-panel">
-                <div class="panel-header">
-                    <h2><span class="icon">⛓️</span> PROOF-OF-SURVEILLANCE LEDGER (SHA-256 HASH CHAIN)</h2>
-                    <span class="badge cyan" id="ledger-verified-badge">MATHEMATICALLY INTACT</span>
+            <!-- Middle Column: Cockpit Instruments, Artificial Horizon & Sensors -->
+            <section class="grid-col middle-col">
+                <!-- Aviation Gauges Grid -->
+                <div class="panel gauges-panel">
+                    <div class="panel-header">
+                        <h2><span class="icon">🧭</span> FLIGHT INSTRUMENTS & AVIONIC TELEMETRY</h2>
+                        <span class="tag" id="uav-model-tag">UAV-ALPHA-01</span>
+                    </div>
+                    <div class="gauges-grid">
+                        <!-- Heading Gauge -->
+                        <div class="gauge-card" id="gauge-hdg">
+                            <div class="gauge-header">
+                                <span class="gauge-label">HEADING</span>
+                                <div class="compass-icon-wrap" id="compass-icon-wrap">
+                                    <svg width="24" height="24" viewBox="0 0 28 28">
+                                        <circle cx="14" cy="14" r="12" fill="none" stroke="#334155" stroke-width="1" />
+                                        <g id="compass-needle" transform="rotate(0, 14, 14)">
+                                            <polygon points="14,4 16,14 14,12 12,14" fill="#00e5ff" />
+                                            <polygon points="14,24 16,14 14,16 12,14" fill="#64748b" opacity="0.6" />
+                                        </g>
+                                        <circle cx="14" cy="14" r="1.5" fill="#00e5ff" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="gauge-value-row">
+                                <span class="gauge-value cyan font-tabular" id="val-hdg">000°</span>
+                                <span class="gauge-sub" id="val-hdg-cardinal">N</span>
+                            </div>
+                        </div>
+
+                        <!-- Altitude Gauge -->
+                        <div class="gauge-card" id="gauge-alt">
+                            <div class="gauge-header">
+                                <span class="gauge-label">ALTITUDE</span>
+                                <span class="gauge-unit">m AGL</span>
+                            </div>
+                            <div class="gauge-value-row">
+                                <span class="gauge-value cyan font-tabular" id="val-alt">55.0</span>
+                                <div class="vertical-bar-wrap">
+                                    <div class="vertical-bar-fill" id="bar-alt-fill" style="height: 55%;"></div>
+                                </div>
+                            </div>
+                            <span class="gauge-sub" id="val-alt-status">EN ROUTE LEVEL</span>
+                        </div>
+
+                        <!-- Speed Gauge -->
+                        <div class="gauge-card" id="gauge-spd">
+                            <div class="gauge-header">
+                                <span class="gauge-label">GROUND SPEED</span>
+                                <span class="gauge-unit">m/s</span>
+                            </div>
+                            <div class="gauge-value-row">
+                                <span class="gauge-value cyan font-tabular" id="val-spd">12.5</span>
+                            </div>
+                            <div class="horizontal-bar-wrap">
+                                <div class="horizontal-bar-fill" id="bar-spd-fill" style="width: 50%;"></div>
+                            </div>
+                            <span class="gauge-sub" id="val-spd-kmh">45.0 km/h</span>
+                        </div>
+
+                        <!-- Battery Gauge -->
+                        <div class="gauge-card" id="gauge-bat">
+                            <div class="gauge-header">
+                                <span class="gauge-label">BATTERY</span>
+                                <span class="gauge-unit">%</span>
+                            </div>
+                            <div class="gauge-value-row">
+                                <span class="gauge-value green font-tabular" id="val-bat">98.5</span>
+                            </div>
+                            <div class="horizontal-bar-wrap">
+                                <div class="horizontal-bar-fill green-bar" id="bar-bat-fill" style="width: 98%;"></div>
+                            </div>
+                            <span class="gauge-sub" id="val-bat-voltage">22.4V | NOMINAL</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="audit-log-container" id="audit-log">
-                    <div class="audit-entry">
-                        <span class="hash-height">#0 [GENESIS]</span>
-                        <span class="hash-val">0000000000000000000000000000000000000000000000000000000000000000</span>
-                        <span class="hash-tag">CIPHERCOP-2026-GRID-INIT</span>
+
+                <!-- Canvas Artificial Horizon / Attitude Indicator -->
+                <div class="panel horizon-panel">
+                    <div class="panel-header">
+                        <h2><span class="icon">✈️</span> ATTITUDE INDICATOR (ARTIFICIAL HORIZON)</h2>
+                        <span class="tag">CANVAS 60FPS</span>
+                    </div>
+                    <div class="horizon-wrapper">
+                        <canvas id="horizon-canvas" width="240" height="240"></canvas>
+                        <div class="horizon-readouts">
+                            <span>PITCH: <strong class="cyan" id="val-pitch">+0.0°</strong></span>
+                            <span>ROLL: <strong class="cyan" id="val-roll">+0.0°</strong></span>
+                            <span>YAW: <strong class="cyan" id="val-yaw">000.0°</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Environmental & Hardware Sensor Matrix -->
+                <div class="panel sensors-panel">
+                    <div class="panel-header">
+                        <h2><span class="icon">📡</span> SENSOR TELEMETRY & HARDWARE HEALTH</h2>
+                        <span class="tag green-tag">ALL SYSTEMS GO</span>
+                    </div>
+                    <div class="sensors-grid">
+                        <div class="sensor-row">
+                            <span class="s-label">TEMP</span>
+                            <span class="s-val" id="sensor-temp">26.2°C</span>
+                            <span class="s-status green">NORMAL</span>
+                        </div>
+                        <div class="sensor-row">
+                            <span class="s-label">PRESSURE</span>
+                            <span class="s-val" id="sensor-pres">1007 hPa</span>
+                            <span class="s-status green">NORMAL</span>
+                        </div>
+                        <div class="sensor-row">
+                            <span class="s-label">WIND</span>
+                            <span class="s-val" id="sensor-wind">3.8 m/s</span>
+                            <span class="s-status green">NORMAL</span>
+                        </div>
+                        <div class="sensor-row">
+                            <span class="s-label">GPS SATS</span>
+                            <span class="s-val" id="sensor-sats">15 SATS</span>
+                            <span class="s-status green">LOCKED</span>
+                        </div>
+                        <div class="sensor-row">
+                            <span class="s-label">HDOP</span>
+                            <span class="s-val" id="sensor-hdop">0.82</span>
+                            <span class="s-status green">PRECISION</span>
+                        </div>
+                        <div class="sensor-row">
+                            <span class="s-label">RSSI</span>
+                            <span class="s-val" id="sensor-rssi">-66 dBm</span>
+                            <span class="s-status green">EXCELLENT</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column: Alerts, Crowd Dynamics, Watchlist & Blockchain Vault -->
+            <section class="grid-col right-col">
+                <!-- Multi-Level Intelligent Alert Stream -->
+                <div class="panel alerts-panel">
+                    <div class="panel-header">
+                        <h2><span class="icon">🚨</span> TACTICAL ALERTS & PERIMETER VIOLATIONS</h2>
+                        <span class="badge-count" id="alert-badge-count">1 ACTIVE</span>
+                    </div>
+                    <div class="alerts-feed" id="alerts-feed">
+                        <!-- Alert items populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Crowd Panic & Stampede Early Warning Barometer -->
+                <div class="panel crowd-panel">
+                    <div class="panel-header">
+                        <h2><span class="icon">👥</span> CROWD DYNAMICS (∇·v DIVERGENCE FLUX)</h2>
+                        <span class="risk-badge green" id="crowd-risk-badge">LOW RISK</span>
+                    </div>
+                    <div class="crowd-content">
+                        <div class="barometer-track">
+                            <div class="barometer-fill" id="crowd-bar-fill" style="width: 14%;"></div>
+                        </div>
+                        <div class="crowd-metrics-grid">
+                            <div class="c-metric">
+                                <span class="c-label">DENSITY</span>
+                                <span class="c-val" id="density-val">1.8 pax/m²</span>
+                            </div>
+                            <div class="c-metric">
+                                <span class="c-label">DIV FLUX</span>
+                                <span class="c-val" id="div-flux-val">+0.14 m/s</span>
+                            </div>
+                            <div class="c-metric">
+                                <span class="c-label">ALTERCATION</span>
+                                <span class="c-val green" id="fight-val">NORMAL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biometric Watchlist Hit Card (ArcFace 512-D) -->
+                <div class="panel watchlist-panel">
+                    <div class="panel-header">
+                        <h2><span class="icon">🎯</span> BIOMETRIC WATCHLIST (ARCFACE 512-D)</h2>
+                        <span class="badge red">1 HIT DETECTED</span>
+                    </div>
+                    <div class="suspect-card" id="suspect-card">
+                        <div class="suspect-avatar">
+                            <div class="avatar-ring"></div>
+                            <span class="avatar-text">TARGET</span>
+                        </div>
+                        <div class="suspect-info">
+                            <div class="suspect-name" id="suspect-name">Rohan Sharma</div>
+                            <div class="suspect-warrant red" id="suspect-warrant">RED NOTICE FUGITIVE #441</div>
+                            <div class="suspect-meta">
+                                <span>Confidence: <strong class="green" id="suspect-conf">89.2%</strong></span>
+                                <span>Camera: <strong id="suspect-cam">UAV-ALPHA-01</strong></span>
+                                <span>GPS: <strong id="suspect-gps">17.445892, 78.350114</strong></span>
+                            </div>
+                        </div>
+                        <button class="btn-intercept" onclick="dispatchIntercept()">DISPATCH INTERCEPT</button>
+                    </div>
+                </div>
+
+                <!-- Proof-of-Surveillance SHA-256 Blockchain Ledger -->
+                <div class="panel audit-panel">
+                    <div class="panel-header">
+                        <h2><span class="icon">⛓️</span> PROOF-OF-SURVEILLANCE SHA-256 VAULT</h2>
+                        <span class="badge cyan" id="ledger-verified-badge">LEDGER INTACT</span>
+                    </div>
+                    <div class="audit-log-container" id="audit-log">
+                        <!-- Blockchain blocks dynamically rendered -->
                     </div>
                 </div>
             </section>

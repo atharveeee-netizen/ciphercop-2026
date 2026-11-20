@@ -244,6 +244,54 @@ async def websocket_tactical_stream(websocket: WebSocket):
                             }
                         )
 
+            # Calculate dynamic avionic and mission metrics
+            roll_deg = round(float(np.sin(elapsed * 0.8) * 3.8), 2) if "UAV" in cam_id else 0.0
+            ground_speed_mps = round(12.4 + float(np.sin(elapsed * 0.2) * 1.6), 1) if "UAV" in cam_id else 0.0
+            battery_pct = max(18.0, round(98.5 - (elapsed * 0.04), 1))
+            
+            if elapsed < 4.0:
+                mission_phase = "PRE_FLIGHT"
+            elif elapsed < 9.0:
+                mission_phase = "TAKEOFF"
+            elif elapsed < 18.0:
+                mission_phase = "EN_ROUTE"
+            elif elapsed < 85.0:
+                mission_phase = "ON_STATION"
+            elif elapsed < 110.0:
+                mission_phase = "RTL"
+            else:
+                mission_phase = "LANDING"
+            
+            mission_progress = min(100, max(5, int((elapsed / 90.0) * 100)))
+
+            # Unified dynamic alerts
+            unified_alerts = []
+            if breach_alerts:
+                for b in breach_alerts:
+                    unified_alerts.append({
+                        "id": f"ALERT-GEO-{int(time.time()*1000)%10000}",
+                        "level": "CRITICAL",
+                        "title": f"GEOFENCE BREACH: {b.get('zone_name', 'PERIMETER')}",
+                        "message": f"Target {b.get('target_id')} penetrated restricted boundary.",
+                        "timestamp_iso": time.strftime("%H:%M:%S")
+                    })
+            if crowd_report.stampede_risk in ["CRITICAL", "ELEVATED"]:
+                unified_alerts.append({
+                    "id": f"ALERT-CRD-{int(time.time()*1000)%10000}",
+                    "level": "WARNING" if crowd_report.stampede_risk == "ELEVATED" else "CRITICAL",
+                    "title": f"CROWD DIVERGENCE: {crowd_report.stampede_risk}",
+                    "message": f"Velocity divergence flux: {crowd_report.divergence_flux:+.2f} m/s",
+                    "timestamp_iso": time.strftime("%H:%M:%S")
+                })
+            if not unified_alerts:
+                unified_alerts.append({
+                    "id": "SYS-NORM-01",
+                    "level": "INFO",
+                    "title": "GRID STATUS NOMINAL",
+                    "message": "All sensors tracking within normal operating thresholds.",
+                    "timestamp_iso": time.strftime("%H:%M:%S")
+                })
+
             # Construct Comprehensive Tactical Payload
             payload = {
                 "timestamp_ms": int(time.time() * 1000),
@@ -254,7 +302,23 @@ async def websocket_tactical_stream(websocket: WebSocket):
                     "longitude": pose.longitude,
                     "altitude_agl_m": pose.altitude_agl_m,
                     "pitch_deg": pose.pitch_deg,
-                    "yaw_deg": pose.yaw_deg
+                    "roll_deg": roll_deg,
+                    "yaw_deg": pose.yaw_deg,
+                    "ground_speed_mps": ground_speed_mps,
+                    "battery_pct": battery_pct
+                },
+                "mission": {
+                    "phase": mission_phase,
+                    "progress": mission_progress,
+                    "elapsed_formatted": time.strftime("%M:%S", time.gmtime(elapsed))
+                },
+                "sensors": {
+                    "temperature_c": round(26.2 + float(np.sin(elapsed * 0.05) * 1.1), 1),
+                    "pressure_hpa": round(1013.2 - (pose.altitude_agl_m * 0.11), 1),
+                    "wind_speed_mps": round(3.8 + float(np.cos(elapsed * 0.1) * 1.5), 1),
+                    "satellites": 15,
+                    "hdop": 0.82,
+                    "rssi_dbm": -66
                 },
                 "targets": tracked_dets,
                 "crowd_status": {
@@ -265,6 +329,7 @@ async def websocket_tactical_stream(websocket: WebSocket):
                     "fight_detected": crowd_report.fight_detected,
                     "active_alerts": crowd_report.active_alerts
                 },
+                "alerts": unified_alerts,
                 "geofence_breaches": breach_alerts,
                 "audit_block_height": len(vault.chain),
                 "geofences": [
