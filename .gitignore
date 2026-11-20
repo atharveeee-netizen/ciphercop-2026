@@ -1,4 +1,4 @@
-﻿# Byte-compiled / optimized / DLL files
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
@@ -15,10 +15,12 @@ data/raw/
 *.avi
 *.mkv
 *.weights
-*.onnx
-*.pt
-*.pth
-*.bin
+
+# Allow specific trained model checkpoints
+!models/*.pt
+!models/*.pth
+!models/*.onnx
+!models/*.json
 
 # Logs & temp
 logs/
