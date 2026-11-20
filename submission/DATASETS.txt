@@ -1,0 +1,66 @@
+================================================================================
+  AEGISDRONE-GEOINT (SENTINELGRID-360) - DATASET REFERENCES & ACCESS LINKS
+  National Hackathon on AI for Public Safety and Resilience (CipherCop 2026)
+  Team: Gradient Ascent (Akshit Agarwal, Aasutosh Dubey, Atharve Dahima)
+================================================================================
+
+Due to the multi-gigabyte scale of raw video frames and high-resolution aerial datasets,
+the verified download mirrors, academic citations, and preprocessing manifests are
+indexed below for evaluation and reproducibility:
+
+--------------------------------------------------------------------------------
+1. VisDrone2021-DET & VisDrone-MOT (UAV Aerial Object Detection & Tracking)
+--------------------------------------------------------------------------------
+- Description: 10,209 high-resolution aerial images and 288 video clips captured by
+  various drone platforms at altitudes from 10m to 120m AGL across 14 cities in China.
+- Classes: Pedestrian, Person, Car, Van, Bus, Truck, Motor, Bicycle, Awning-Tricycle.
+- Access URL: https://github.com/VisDrone/VisDrone-Dataset
+- Official Portal: http://aiskyeye.com/
+- Primary Task: Training and evaluating Aerial Detector SAHI multi-scale slicing heads.
+
+--------------------------------------------------------------------------------
+2. UAVDT (UAV Detection and Tracking Benchmark)
+--------------------------------------------------------------------------------
+- Description: Over 80,000 aerial video frames recorded across diverse flight
+  conditions (gimbal depression from -30 deg to -90 deg nadir, varied weather, altitudes).
+- Access URL: https://sites.google.com/site/daviddo0323/projects/uavdt
+- Paper DOI: https://doi.org/10.1007/978-3-030-01252-6_29
+- Primary Task: Verifying 4D ray-cast photogrammetric altitude/pitch compensation.
+
+--------------------------------------------------------------------------------
+3. CrowdHuman & WiderPerson Benchmark (High-Density Crowd Dynamics)
+--------------------------------------------------------------------------------
+- Description: Over 24,000 images with dense annotations (mean 23 persons per image)
+  exhibiting extreme occlusion, overlapping silhouettes, and tight crowd packing.
+- Access URL: https://www.crowdhuman.net/
+- Access URL (WiderPerson): http://www.skicyyu.org/WiderPerson/
+- Primary Task: Calibration of velocity divergence flux (div v) and density barometers.
+
+--------------------------------------------------------------------------------
+4. InsightFace / ArcFace Biometric Surveillance Benchmark (512-D Embeddings)
+--------------------------------------------------------------------------------
+- Description: Deep additive angular margin benchmark spanning over 5.8 million identities
+  used for training 512-D hypersphere embedding manifolds robust to unconstrained pose.
+- Access URL: https://github.com/deepinsight/insightface
+- Primary Task: Facial vector indexing, 1:N cosine query calibration, and oblique unwarping.
+
+--------------------------------------------------------------------------------
+5. RWF-2000 & UCF-Crime (Real-World Violence & Altercation Anomaly Benchmark)
+--------------------------------------------------------------------------------
+- Description: 2,000 real-world surveillance video clips of violent altercations,
+  physical brawls, and non-violent crowd interactions captured under surveillance angles.
+- Access URL: https://github.com/tiansang-bingtian/RWF2000-Dataset
+- Paper DOI: https://doi.org/10.1109/ICPR48806.2021.9412197
+- Primary Task: Kinetic interaction graph and relative acceleration altercation classifier.
+
+--------------------------------------------------------------------------------
+6. CityFlow / AI City Challenge MTMC Tracking Benchmark
+--------------------------------------------------------------------------------
+- Description: Multi-camera multi-target tracking across overlapping and non-overlapping
+  camera networks with ground-truth GPS camera extrinsics and road topology maps.
+- Access URL: https://www.aicitychallenge.org/
+- Primary Task: Cross-Camera Re-ID Handover evaluation connecting UAVs and fixed CCTVs.
+
+================================================================================
+Generated for CipherCop 2026 Submission by Team Gradient Ascent
+================================================================================
