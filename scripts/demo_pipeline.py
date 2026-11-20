@@ -79,20 +79,16 @@ def run_full_pipeline_demo():
     # 3. Facial Super-Resolution & Biometric Watchlist Matching
     print("\n[STEP 3] Running Oblique Face Super-Resolution & 512-D ArcFace Matcher...")
     for d in georef_dets:
-        if d.get("is_suspect"):
-            # Synthetic 28x28 oblique face crop
-            crop = raw_frame[int(d["v_min"]):int(d["v_min"] + 25), int(d["u_min"]):int(d["u_min"] + 25)]
-            # Query watchlist
-            # For demonstration, generate positive match with seeded fugitive
-            res = face_engine.query_watchlist(crop, gimbal_pitch_deg=pose_uav.pitch_deg)
-            # Override with simulated known hit for fugitive
-            res["matched"] = True
-            res["suspect_name"] = "Rohan Sharma"
-            res["warrant_status"] = "RED_NOTICE_FUGITIVE"
-            res["confidence"] = 0.892
-            res["privacy_unmasked"] = True
+        u1, v1 = int(d["u_min"]), int(d["v_min"])
+        u2, v2 = int(d["u_max"]), int(d["v_max"])
+        head_h = max(18, (v2 - v1) // 3)
+        crop = raw_frame[v1:v1 + head_h, u1:u2]
 
-            d["biometric_match"] = res
+        res = face_engine.query_watchlist(crop, gimbal_pitch_deg=pose_uav.pitch_deg)
+        d["biometric_match"] = res
+        d["privacy_unmasked"] = res.get("privacy_unmasked", False)
+
+        if res.get("matched"):
             print(f"  [ALERT] POSITIVE HIT: Identified Suspect '{res['suspect_name']}' [{res['warrant_status']}] (Confidence: {res['confidence']:.1%})")
             print(f"     Ground GPS: {d['latitude']:.6f}, {d['longitude']:.6f} | Unmasking authorized under judicial protocol.")
 

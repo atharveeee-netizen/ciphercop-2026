@@ -50,17 +50,20 @@ vault = ProofOfSurveillanceVault()
 redactor = PrivacyRedactionEngine()
 simulator = TacticalSimulator()
 
-# Register initial tactical geofences
+# Register initial tactical geofences centered dynamically around base coordinates
+b_lat = settings.BASE_LATITUDE
+b_lon = settings.BASE_LONGITUDE
+
 geofence_mgr.register_geofence(GeofencePolygon(
     zone_id="ZONE-VIP-01",
     zone_name="VIP Enclosure & Stage Corridor",
     zone_type="RESTRICTED_ZONE",
     severity="CRITICAL",
     vertices=[
-        [17.445700, 78.349750],
-        [17.445750, 78.349900],
-        [17.445650, 78.349950],
-        [17.445600, 78.349800]
+        [round(b_lat + 0.00008, 6), round(b_lon - 0.00006, 6)],
+        [round(b_lat + 0.00013, 6), round(b_lon + 0.00009, 6)],
+        [round(b_lat + 0.00003, 6), round(b_lon + 0.00014, 6)],
+        [round(b_lat - 0.00002, 6), round(b_lon - 0.00001, 6)]
     ]
 ))
 
@@ -70,10 +73,10 @@ geofence_mgr.register_geofence(GeofencePolygon(
     zone_type="CROWD_SURGE_ZONE",
     severity="WARNING",
     vertices=[
-        [17.445800, 78.349650],
-        [17.445900, 78.349800],
-        [17.445820, 78.349850],
-        [17.445720, 78.349700]
+        [round(b_lat + 0.00018, 6), round(b_lon - 0.00016, 6)],
+        [round(b_lat + 0.00028, 6), round(b_lon - 0.00001, 6)],
+        [round(b_lat + 0.00020, 6), round(b_lon + 0.00004, 6)],
+        [round(b_lat + 0.00010, 6), round(b_lon - 0.00011, 6)]
     ]
 ))
 

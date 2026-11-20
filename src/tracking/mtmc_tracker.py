@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 from typing import List, Dict, Any, Optional, Tuple
 import time
 import numpy as np
+from src.config import settings
 from src.tracking.kalman_filter import SpatialKalmanFilter
 from src.geoint.raycaster import GeoRayCastEngine
 
@@ -37,13 +38,13 @@ class CrossCameraTracker:
 
     def __init__(
         self,
-        max_speed_kmh: float = 35.0,  # Max realistic pedestrian/vehicle sprint speed for gating
-        reid_similarity_threshold: float = 0.72,
-        max_lost_time_s: float = 45.0
+        max_speed_kmh: Optional[float] = None,
+        reid_similarity_threshold: Optional[float] = None,
+        max_lost_time_s: Optional[float] = None
     ):
-        self.max_speed_kmh = max_speed_kmh
-        self.reid_similarity_threshold = reid_similarity_threshold
-        self.max_lost_time_s = max_lost_time_s
+        self.max_speed_kmh = max_speed_kmh if max_speed_kmh is not None else settings.MAX_KINEMATIC_SPEED_KMH
+        self.reid_similarity_threshold = reid_similarity_threshold if reid_similarity_threshold is not None else settings.REID_SIMILARITY_THRESHOLD
+        self.max_lost_time_s = max_lost_time_s if max_lost_time_s is not None else settings.MAX_LOST_TRACK_TIME_S
         self.global_tracks: Dict[str, GlobalTrack] = {}
         self.kalman_filters: Dict[str, SpatialKalmanFilter] = {}
         self._next_id = 100
@@ -60,18 +61,12 @@ class CrossCameraTracker:
     ) -> List[Dict[str, Any]]:
         """
         Ingests detections from camera_id at timestamp_s.
-        Each detection dict contains:
-          - 'target_id' (local camera detection ID)
-          - 'class_name'
-          - 'latitude', 'longitude' (from GeoRayCast)
-          - 'pixel_bbox': [u_min, v_min, u_max, v_max]
-          - 'embedding': (optional 512-D vector)
         Returns list of detections enriched with 'global_track_id' and 'handover' info.
         """
         enriched_results = []
         unmatched_detections = []
 
-        # 1. First, match against existing tracks that were in the SAME camera
+        # 1. Match against existing tracks that were in the SAME camera
         same_cam_tracks = {
             gid: trk for gid, trk in self.global_tracks.items()
             if trk.is_active and trk.last_camera_id == camera_id
@@ -91,7 +86,6 @@ class CrossCameraTracker:
                 if gid in matched_track_ids:
                     continue
                 dist_m = GeoRayCastEngine.haversine_distance_m(trk.last_lat, trk.last_lon, d_lat, d_lon)
-                # Within 15 meters local continuity
                 if dist_m < 15.0 and dist_m < best_dist:
                     best_dist = dist_m
                     best_gid = gid
@@ -99,7 +93,6 @@ class CrossCameraTracker:
             if best_gid:
                 matched_track_ids.add(best_gid)
                 trk = self.global_tracks[best_gid]
-                # Update speed & heading
                 speed, heading = GeoRayCastEngine.calculate_ground_velocity_kmh(
                     trk.last_lat, trk.last_lon, trk.last_timestamp_s,
                     d_lat, d_lon, timestamp_s
@@ -126,7 +119,7 @@ class CrossCameraTracker:
             else:
                 unmatched_detections.append(det)
 
-        # 2. Second, attempt Cross-Camera Handover for unmatched detections
+        # 2. Cross-Camera Handover for unmatched detections
         other_cam_tracks = {
             gid: trk for gid, trk in self.global_tracks.items()
             if trk.is_active and trk.last_camera_id != camera_id and gid not in matched_track_ids
@@ -152,17 +145,20 @@ class CrossCameraTracker:
                 if implied_speed_kmh > self.max_speed_kmh:
                     continue
 
-                # Appearance gating: Re-ID cosine similarity
-                sim = 0.80  # Default plausible similarity if embeddings are generated
+                # Mathematical similarity scoring (appearance + kinematic plausibility)
                 if d_emb is not None and trk.appearance_embedding is not None:
                     sim = float(np.dot(d_emb, trk.appearance_embedding))
+                else:
+                    # Kinematic proximity scoring when raw embeddings are not attached
+                    kinematic_decay = max(0.0, 1.0 - (implied_speed_kmh / self.max_speed_kmh))
+                    sim = float(0.70 + 0.25 * kinematic_decay)
 
                 if sim >= self.reid_similarity_threshold and sim > best_match_score:
                     best_match_score = sim
                     handover_gid = gid
 
             if handover_gid:
-                # SUCCESSFUL CROSS-CAMERA HANDOVER!
+                # SUCCESSFUL CROSS-CAMERA HANDOVER
                 trk = self.global_tracks[handover_gid]
                 prev_cam = trk.last_camera_id
                 trk.last_camera_id = camera_id

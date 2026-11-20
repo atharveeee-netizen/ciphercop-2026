@@ -10,6 +10,8 @@ import hashlib
 import hmac
 import json
 import time
+from typing import Optional
+from src.config import settings
 
 
 @dataclass
@@ -35,8 +37,9 @@ class ProofOfSurveillanceVault:
 
     GENESIS_HASH = "0000000000000000000000000000000000000000000000000000000000000000"
 
-    def __init__(self, secret_key: str = "CIPHERCOP-2026-LAW-ENFORCEMENT-KEY"):
-        self.secret_key = secret_key.encode("utf-8")
+    def __init__(self, secret_key: Optional[str] = None):
+        raw_key = secret_key or settings.SECRET_KEY
+        self.secret_key = raw_key.encode("utf-8")
         self.chain: List[AuditBlock] = []
         self._init_genesis()
 
