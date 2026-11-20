@@ -1,0 +1,30 @@
+﻿# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Large Datasets & Media
+data/raw/
+*.mp4
+*.avi
+*.mkv
+*.weights
+*.onnx
+*.pt
+*.pth
+*.bin
+
+# Logs & temp
+logs/
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
+.DS_Store
+Thumbs.db
