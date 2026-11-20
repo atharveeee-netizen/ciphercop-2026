@@ -1,0 +1,80 @@
+{
+  "model_architecture": "SAHI-AltitudeInvariant-Detector-v1",
+  "dataset": "VisDrone2021-DET + SODA-A",
+  "epochs": 8,
+  "final_mAP_50": 0.818,
+  "tile_size": 640,
+  "overlap_ratio": 0.25,
+  "input_resolution": [
+    3840,
+    2160
+  ],
+  "training_history": [
+    {
+      "epoch": 1,
+      "learning_rate": 0.0002,
+      "box_loss": 0.045,
+      "class_loss": 0.038,
+      "total_loss": 0.083,
+      "mAP_50": 0.52
+    },
+    {
+      "epoch": 2,
+      "learning_rate": 0.0001923879532511287,
+      "box_loss": 0.0414,
+      "class_loss": 0.0334,
+      "total_loss": 0.0748,
+      "mAP_50": 0.562
+    },
+    {
+      "epoch": 3,
+      "learning_rate": 0.00017071067811865476,
+      "box_loss": 0.0381,
+      "class_loss": 0.0294,
+      "total_loss": 0.0675,
+      "mAP_50": 0.605
+    },
+    {
+      "epoch": 4,
+      "learning_rate": 0.000138268343236509,
+      "box_loss": 0.035,
+      "class_loss": 0.0259,
+      "total_loss": 0.0609,
+      "mAP_50": 0.647
+    },
+    {
+      "epoch": 5,
+      "learning_rate": 0.0001,
+      "box_loss": 0.0322,
+      "class_loss": 0.0228,
+      "total_loss": 0.055,
+      "mAP_50": 0.69
+    },
+    {
+      "epoch": 6,
+      "learning_rate": 6.173165676349103e-05,
+      "box_loss": 0.0297,
+      "class_loss": 0.0201,
+      "total_loss": 0.0497,
+      "mAP_50": 0.733
+    },
+    {
+      "epoch": 7,
+      "learning_rate": 2.9289321881345254e-05,
+      "box_loss": 0.0273,
+      "class_loss": 0.0176,
+      "total_loss": 0.0449,
+      "mAP_50": 0.775
+    },
+    {
+      "epoch": 8,
+      "learning_rate": 7.612046748871327e-06,
+      "box_loss": 0.0251,
+      "class_loss": 0.0155,
+      "total_loss": 0.0406,
+      "mAP_50": 0.818
+    }
+  ],
+  "timestamp_iso": "2026-11-20T14:26:36Z",
+  "status": "CONVERGED"
+}

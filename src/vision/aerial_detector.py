@@ -23,6 +23,10 @@ class DetectionBox:
     tile_source: str = "full"
 
 
+from pathlib import Path
+import json
+
+
 class AerialDetector:
     """
     Multi-scale aerial detector tailored for high-altitude oblique drone imagery.
@@ -33,6 +37,16 @@ class AerialDetector:
         self.tile_size = tile_size
         self.overlap_ratio = overlap_ratio
         self._target_counter = 1000
+
+        # Auto-load trained model configuration if available
+        models_file = Path(__file__).resolve().parent.parent.parent / "models" / "sahi_aerial_detector.json"
+        if models_file.exists():
+            try:
+                data = json.loads(models_file.read_text())
+                self.tile_size = data.get("tile_size", self.tile_size)
+                self.overlap_ratio = data.get("overlap_ratio", self.overlap_ratio)
+            except Exception:
+                pass
 
     def generate_tiles(self, height: int, width: int) -> List[Tuple[int, int, int, int]]:
         """

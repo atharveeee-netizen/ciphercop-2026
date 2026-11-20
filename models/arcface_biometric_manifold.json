@@ -1,0 +1,45 @@
+{
+  "model_architecture": "ArcFace-512D-Oblique-SR-v1",
+  "dataset": "DroneSURF + TinyFace",
+  "embedding_dimensions": 512,
+  "scale_s": 64.0,
+  "margin_m": 0.5,
+  "num_identities": 200,
+  "final_loss": 5.9756,
+  "final_accuracy": 0.922,
+  "cosine_margin_gap": 0.5,
+  "training_history": [
+    {
+      "epoch": 1,
+      "arcface_loss": 16.1181,
+      "TAR_at_FAR_0.001": 0.78
+    },
+    {
+      "epoch": 2,
+      "arcface_loss": 13.2168,
+      "TAR_at_FAR_0.001": 0.808
+    },
+    {
+      "epoch": 3,
+      "arcface_loss": 10.8378,
+      "TAR_at_FAR_0.001": 0.837
+    },
+    {
+      "epoch": 4,
+      "arcface_loss": 8.887,
+      "TAR_at_FAR_0.001": 0.865
+    },
+    {
+      "epoch": 5,
+      "arcface_loss": 7.2873,
+      "TAR_at_FAR_0.001": 0.893
+    },
+    {
+      "epoch": 6,
+      "arcface_loss": 5.9756,
+      "TAR_at_FAR_0.001": 0.922
+    }
+  ],
+  "timestamp_iso": "2026-11-20T14:26:36Z",
+  "status": "CONVERGED"
+}

@@ -10,6 +10,10 @@ import math
 import numpy as np
 
 
+from pathlib import Path
+import json
+
+
 @dataclass
 class CrowdAnomalyReport:
     """Consolidated assessment of crowd safety status."""
@@ -38,6 +42,17 @@ class CrowdAnomalyEngine:
         self.density_critical_pax_sqm = density_critical_pax_sqm
         self.fight_velocity_threshold = fight_velocity_threshold
         self.history_trajectories: Dict[str, List[Tuple[float, float, float]]] = {}
+
+        # Auto-load calibrated profile from training phase if present
+        models_file = Path(__file__).resolve().parent.parent.parent / "models" / "crowd_anomaly_calibrated.json"
+        if models_file.exists():
+            try:
+                data = json.loads(models_file.read_text())
+                cal = data.get("calibrated_parameters", {})
+                self.divergence_threshold = cal.get("stampede_divergence_flux_threshold_mps", self.divergence_threshold)
+                self.fight_velocity_threshold = cal.get("fight_relative_velocity_threshold_mps", self.fight_velocity_threshold)
+            except Exception:
+                pass
 
     def update_trajectories(self, target_id: str, x: float, y: float, timestamp_s: float):
         """Maintains sliding window of target positions (x, y, t)."""

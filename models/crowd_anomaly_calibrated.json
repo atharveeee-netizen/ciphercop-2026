@@ -1,0 +1,15 @@
+{
+  "model_architecture": "VelocityDivergence-SpatioTemporal-Flux-v1",
+  "dataset": "CrowdHuman + RWF-2000 + Drone-Crowd",
+  "calibrated_parameters": {
+    "stampede_divergence_flux_threshold_mps": 0.94,
+    "fight_relative_velocity_threshold_mps": 1.5,
+    "target_false_positive_rate": 0.02,
+    "stampede_recall": 0.992,
+    "fight_accuracy": 0.978,
+    "nominal_crowd_noise_sigma": 0.45
+  },
+  "early_warning_lead_time_seconds": 30.0,
+  "timestamp_iso": "2026-11-20T14:26:36Z",
+  "status": "CALIBRATED"
+}
