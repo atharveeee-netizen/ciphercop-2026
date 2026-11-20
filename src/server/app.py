@@ -17,6 +17,7 @@ import cv2
 import numpy as np
 
 # Core Engine Modules
+from src.config import settings
 from src.geoint.raycaster import GeoRayCastEngine, DronePose, CameraIntrinsics
 from src.geoint.geofence import GeofenceManager, GeofencePolygon
 from src.vision.aerial_detector import AerialDetector
